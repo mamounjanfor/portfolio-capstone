@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask
-        image: 19841022/flask1
+        image: 19841022/flask2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
