@@ -1,19 +1,13 @@
-FROM alpine:latest
-
-RUN apk add --no-cache python3-dev \
-    && apk add py3-pip \
-    && pip3 install --upgrade pip
-
-# We copy just the requirements.txt first to leverage Docker cache
+FROM python:3.8
 
 WORKDIR /app
 
-COPY . /app
+ADD . /app
 
-RUN pip3 --no-cache-dir install -r requirements.txt
+RUN rm -rf variable.tf
+
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 EXPOSE 5000
 
-ENTRYPOINT ["python3"]
-
-CMD ["server.py"]
+CMD ["python", "app.py"]
